@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 // Denote the parameters as pointers since that is what we are taking in.
-void calc_age(int *age, int *b_count);
-// This guarantees that we can modify the actual values of age.
+void calc_age(int *age, const int *b_count);
+// This guarantees that we can modify the actual value of age.
 
 int main(void){
     // Okay let's say I want to create a function that does the following.
@@ -26,14 +26,19 @@ int main(void){
     int *pB_count = &birth_count;
 
     // So now we have 2 pointers that point in the address of both age and b_count
-    // I will now write a function and add a prototype (lines 3 and [])
+    // I will now write a function and add a prototype (lines 3 and 38)
 
     // Calling function...
     calc_age(pAge,pB_count);
     printf("Your new age would be: %d\n",age);
+
+    // Proving that b_count did not change!
+    printf("Proof of const keyword working:%d\n",birth_count);
 }
 
-void calc_age(int *age, int *b_count){
+// Note that age does not have a const keyword attached to it. WE WANT TO MODIFY IT!
+// b_count should stay the same.
+void calc_age(int *age, const int *b_count){
     printf("%d\n",*age);
     printf("%d\n",*b_count);
 
